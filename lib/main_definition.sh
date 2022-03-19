@@ -8,7 +8,7 @@ parser_definition() {
 
     msg -- '' 'Commands: '
     msg -- 'Use command -h for a command help.'
-    cmd cmd1 -- "CMD1 description."
+    cmd ls -- "lists available Flowbite-Svelte Components."
     cmd cmd2 -- "CMD2 description."
     cmd text_example -- "Print different type of texts."
     cmd create -- "Create this and that."

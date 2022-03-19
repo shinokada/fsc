@@ -57,11 +57,11 @@ script_dir=${self%/*}
     . "${script_dir}/lib/getoptions.sh"
     . "${script_dir}/lib/main_definition.sh"
     . "${script_dir}/lib/utils.sh"
-    . "${script_dir}/lib/cmd1_definition.sh"
+    . "${script_dir}/lib/ls_definition.sh"
     . "${script_dir}/lib/cmd2_definition.sh"
     . "${script_dir}/lib/create_definition.sh"
     # import only one of helpers file
-    # . "${script_dir}/lib/shell_helpers.sh"
+    . "${script_dir}/lib/shell_helpers.sh"
     # or
     # . "${script_dir}/lib/bash_helpers.sh"
 }
@@ -92,13 +92,13 @@ if [ $# -gt 0 ]; then
     cmd=$1
     shift
     case $cmd in
-    cmd1)
-        eval "$(getoptions parser_definition_cmd1 parse "$0")"
+    ls)
+        eval "$(getoptions parser_definition_ls parse "$0")"
         parse "$@"
         eval "set -- $REST"
         # shellcheck disable=SC1091
-        . "${script_dir}/src/cmd1.sh"
-        fn_cmd1 "$@"
+        . "${script_dir}/src/ls.sh"
+        fn_ls "$@"
         ;;
     cmd2)
         eval "$(getoptions parser_definition_cmd2 parse "$0")"
