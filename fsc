@@ -64,6 +64,7 @@ script_dir=${self%/*}
     . "${script_dir}/lib/shell_helpers.sh"
     # or
     # . "${script_dir}/lib/bash_helpers.sh"
+    . "${script_dir}/src/ls.sh"
 }
 
 # Keep it. You need this for main parser.
@@ -86,42 +87,41 @@ eval "set -- $REST"
 # check_cmd jq
 # check_cmd you_dont_have_it
 
+PROJECT_DIR=$(pwd)
+MYFILE="flowbite_svelte_components"
+PACKAGEFILE="${PROJECT_DIR}/node_modules/flowbite-svelte/package.json"
+
+if [ $# -gt 0 ]; then
+    fn_ls "$@"
+    exit 0
+else
+    echo "PARAM: $PARAM"
+    jq '.exports' "${PACKAGEFILE}" | awk '/\/.*\/.*:/{
+    gsub(/"/,"",$0)
+    gsub(/,$/,"",$0)
+    nf=split ($0,array,".svelte:")
+    ni=split (array[1],subarray,"/")
+    print subarray[ni],array[2]
+    }'| tee "${MYFILE}"
+fi
+
+
+
 # Add more commands.
 # Don't forget to add your command in lib/main_definition.sh
-if [ $# -gt 0 ]; then
-    cmd=$1
-    shift
-    case $cmd in
-    ls)
-        eval "$(getoptions parser_definition_ls parse "$0")"
-        parse "$@"
-        eval "set -- $REST"
-        # shellcheck disable=SC1091
-        . "${script_dir}/src/ls.sh"
-        fn_ls "$@"
-        ;;
-    cmd2)
-        eval "$(getoptions parser_definition_cmd2 parse "$0")"
-        parse "$@"
-        eval "set -- $REST"
-        # shellcheck disable=SC1091
-        . "${script_dir}/src/cmd2.sh"
-        fn_cmd2 "$@"
-        ;;
-    text_example)
-        # shellcheck disable=SC1091
-        . "${script_dir}/src/text_example.sh"
-        fn_text
-        ;;
-    create)
-        eval "$(getoptions parser_definition_create parse "$0")"
-        parse "$@"
-        eval "set -- $REST"
-        # shellcheck disable=SC1091
-        . "${script_dir}/src/create.sh"
-        fn_create "$@"
-        ;;
-    # more lines
-    --) ;; # no subcommand, arguments only
-    esac
-fi
+# if [ $# -gt 0 ]; then
+#     cmd=$1
+#     shift
+#     case $cmd in
+#     ls)
+#         eval "$(getoptions parser_definition_ls parse "$0")"
+#         parse "$@"
+#         eval "set -- $REST"
+#         # shellcheck disable=SC1091
+#         . "${script_dir}/src/ls.sh"
+#         fn_ls "$@"
+#         ;;
+#     # more lines
+#     --) ;; # no subcommand, arguments only
+#     esac
+# fi
