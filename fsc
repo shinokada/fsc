@@ -6,7 +6,7 @@
 # Date:          2022-03-20
 
 set -eu
-VERSION="0.1.0"
+VERSION="0.1.1"
 SCRIPT_NAME=$(basename "$0")
 
 # Set variables
@@ -68,6 +68,9 @@ script_dir=${self%/*}
 eval "$(getoptions parser_definition parse "$0") exit 1"
 parse "$@"
 eval "set -- $REST"
+
+
+check_cmd jq
 
 if [ $# -gt 0 ]; then
     MYLINE=$(jq '.exports' "${PACKAGEFILE}" | awk '/\/.*\/.*:/{

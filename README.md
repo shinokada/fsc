@@ -1,16 +1,39 @@
 # fsc (Flowbite-svelte-cli)
 
-## Getting started
-
-Install `fsc`:
-
-```sh
-
-```
-
 ## What in this?
 
-Flowbite-Svelte has many components. This CLI allows you to find compoent default props from your command line.
+[Flowbite-Svelte](https://github.com/shinokada/flowbite-svelte) has many components. This a Shell script CLI allows you to find compoent default props from your command line.
+
+## Getting started
+
+### Install `fsc`
+
+#### Using Awesome package manager
+
+Install [Awesome package manager](https://github.com/shinokada/awesome)
+
+```sh
+awesome install shinokada/fsc
+```
+
+Uninstallation
+
+```sh
+awesome rm fsc
+```
+
+#### Using Homebrew
+
+```sh
+brew tap shinokada/fsc
+brew install fsc
+```
+
+Uninstallation
+
+```sh
+brew uninstall fsc
+```
 
 ## Commands
 
