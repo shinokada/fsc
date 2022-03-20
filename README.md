@@ -2,23 +2,28 @@
 
 ## Getting started
 
+Install `fsc`:
 
+```sh
+
+```
 
 ## What in this?
 
-
+Flowbite-Svelte has many components. This CLI allows you to find compoent default props from your command line.
 
 ## Commands
 
 ```sh
-fsc --help
-fsc ls
-fsc ls --help
+// list all Flowbite-Svelte components
+fsc
+// list export props of a component
 fsc <component>
-fsc <component> --help
 fsc badge
-fsc badge --help
 fsc accordiondefault
 fsc button
+// show help
+fsc --help
+// show version
 fsc --version
 ```
